@@ -47,9 +47,9 @@ body{
       background-image:url('../assets/home/title.png');
       background-size:100% 100%;
       line-height: 6vh;
-      font-size: 36px;
+      font-size: 40px;
       color: #fff;
-      font-weight: 300;
+      font-weight: 600;
       z-index: 1;
     }
     .h_bg2{

@@ -75,7 +75,7 @@ export default {
         _this.earth = true
 
         _this.$emit('videoChange', key)
-      }, 2000)
+      }, 1000)
       document.querySelectorAll('.ball_base3').forEach((item, index, arr) => {
         item.classList.add('ball_base_a3')
       })
@@ -565,8 +565,8 @@ export default {
 .u_p3d_earth{
     position: static;
     margin-top: 35vh;
-    animation:earthmove 2s forwards;
-   -webkit-animation:earthmove 2s forwards; /*Safari and Chrome*/
+    animation:earthmove 1s forwards;
+   -webkit-animation:earthmove 1s forwards; /*Safari and Chrome*/
 }
 @keyframes earthmove
 {
@@ -600,24 +600,24 @@ export default {
 }
 .ui_base {
     position: relative;
-    width: 55vw;
+    width: 60vw;
     height: 0px;
     margin:0 auto;
     -webkit-perspective: 50vw;
     -webkit-perspective-origin: 50% 0%;
-    perspective: 100vw;
+    perspective: 300vw;
     perspective-origin: 50% 0%;
 }
 .base{
     -webkit-transform: rotateX(103deg) rotateY(0deg);
     transform: rotateX(103deg) rotateY(0deg);
     position: fixed;
-    width: 55vw;
-    height: 55vw;
-    top: -8vh;
+    width: 60vw;
+    height: 60vw;
+    top: -10vh;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    animation: cir 16s linear 0s infinite;
+    animation: cir 48s linear 0s infinite;
     // border: 1px solid red
 }
 .base2{
@@ -651,22 +651,22 @@ export default {
 }
 .ball_base {
     -webkit-transform-origin: 100%;
-    transform-origin: 27.5vw 0px;
+    transform-origin: 30vw 0px;
     position: absolute;
-    top: 48vh;
+    top: 53vh;
     width: 20vh;
     height: 127px;
 }
 .ball_base_a {
-    animation:mymove3 2s forwards;
-   -webkit-animation:mymove3 2s  forwards; /*Safari and Chrome*/
+    animation:mymove3 1s forwards;
+   -webkit-animation:mymove3 1s  forwards; /*Safari and Chrome*/
 }
 
 @keyframes mymove3
 {
   0% {
-    -webkit-transform-origin:27.5vw 0px;
-    transform-origin: 27.5vw 0px;
+    -webkit-transform-origin:309vw 0px;
+    transform-origin: 30vw 0px;
     left:0vw;
     position: absolute;
     opacity:1;
@@ -674,7 +674,7 @@ export default {
   100% {
     -webkit-transform-origin:0vw 0px;
     transform-origin: 0vw 0px;
-    left:27vw;
+    left:30vw;
     position: absolute;
     opacity:0;
   }
@@ -815,6 +815,27 @@ export default {
   justify-content: center;
 }
 
+.ball:hover{
+  -webkit-transition:all 2s ease-out 0ms;
+  transition:all 2s ease-out 0ms;
+  -webkit-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+  position: absolute;
+  width: 170px;
+  height: 250px;
+  text-align: center;
+  background-image: url(../../assets/home/ball_a.png);
+  background-size: 100% 100%;
+  left: 0px;
+  top: 0px;
+  color: rgba(255, 255, 255, 0);
+  font-size: 12px;
+  opacity: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 .ball_c {
     -webkit-transform-origin: 50% 50%;
     transform-origin: 50% 50%;
@@ -884,122 +905,122 @@ export default {
 
 .ball_1 .ball {
   transform: rotateY(10deg) rotateZ(10deg) rotateX(60deg);
-  animation: cir1 16s linear 0s infinite;
+  animation: cir1 48s linear 0s infinite;
   -webkit-transition-delay: 1700ms !important;
   transition-delay: 1700ms !important;
 }
 .ball_2 .ball {
-  -webkit-animation: cir2 16s linear 0s infinite;
-  animation: cir2 16s linear 0s infinite;
+  -webkit-animation: cir2 48s linear 0s infinite;
+  animation: cir2 48s linear 0s infinite;
   -webkit-transition-delay: 1500ms !important;
   transition-delay: 1500ms !important;
 }
 .ball_3 .ball {
-  -webkit-animation: cir3 16s linear 0s infinite;
-  animation: cir3 16s linear 0s infinite;
+  -webkit-animation: cir3 48s linear 0s infinite;
+  animation: cir3 48s linear 0s infinite;
   -webkit-transition-delay: 1300ms !important;
   transition-delay: 1300ms !important;
 }
 .ball_4 .ball {
-  -webkit-animation: cir4 16s linear 0s infinite;
-  animation: cir4 16s linear 0s infinite;
+  -webkit-animation: cir4 48s linear 0s infinite;
+  animation: cir4 48s linear 0s infinite;
   -webkit-transition-delay: 1100ms !important;
   transition-delay: 1100ms !important;
 }
 .ball_5 .ball {
-  -webkit-animation: cir5 16s linear 0s infinite;
-  animation: cir5 16s linear 0s infinite;
+  -webkit-animation: cir5 48s linear 0s infinite;
+  animation: cir5 48s linear 0s infinite;
   -webkit-transition-delay: 900ms !important;
   transition-delay: 900ms !important;
 }
 .ball_6 .ball {
-  -webkit-animation: cir6 16s linear 0s infinite;
-  animation: cir6 16s linear 0s infinite;
+  -webkit-animation: cir6 48s linear 0s infinite;
+  animation: cir6 48s linear 0s infinite;
   -webkit-transition-delay: 800ms !important;
   transition-delay: 800ms !important;
 }
 .ball_7 .ball {
-  -webkit-animation: cir7 16s linear 0s infinite;
-  animation: cir7 16s linear 0s infinite;
+  -webkit-animation: cir7 48s linear 0s infinite;
+  animation: cir7 48s linear 0s infinite;
   -webkit-transition-delay: 700ms !important;
   transition-delay: 700ms !important;
 }
 .ball_8 .ball {
-  -webkit-animation: cir8 16s linear 0s infinite;
-  animation: cir8 16s linear 0s infinite;
+  -webkit-animation: cir8 48s linear 0s infinite;
+  animation: cir8 48s linear 0s infinite;
   -webkit-transition-delay: 500ms !important;
   transition-delay: 500ms !important;
 }
 .ball_9 .ball {
-  -webkit-animation: cir9 16s linear 0s infinite;
-  animation: cir9 16s linear 0s infinite;
+  -webkit-animation: cir9 48s linear 0s infinite;
+  animation: cir9 48s linear 0s infinite;
   -webkit-transition-delay: 300ms !important;
   transition-delay: 300ms !important;
 }
 .ball_10 .ball {
-  -webkit-animation: cir10 16s linear 0s infinite;
-  animation: cir10 16s linear 0s infinite;
+  -webkit-animation: cir10 48s linear 0s infinite;
+  animation: cir10 48s linear 0s infinite;
   -webkit-transition-delay: 100ms !important;
   transition-delay: 100ms !important;
 }
 
 .ball_21 .ball {
-  -webkit-animation: cir21 16s linear 0s infinite;
-  animation: cir21 16s linear 0s infinite;
+  -webkit-animation: cir21 48s linear 0s infinite;
+  animation: cir21 48s linear 0s infinite;
   -webkit-transition-delay: 700ms !important;
   transition-delay: 700ms !important;
 }
 .ball_22 .ball {
-  -webkit-animation: cir22 16s linear 0s infinite;
-  animation: cir22 16s linear 0s infinite;
+  -webkit-animation: cir22 48s linear 0s infinite;
+  animation: cir22 48s linear 0s infinite;
   -webkit-transition-delay: 500ms !important;
   transition-delay: 500ms !important;
 }
 .ball_23 .ball {
-  -webkit-animation: cir23 16s linear 0s infinite;
-  animation: cir23 16s linear 0s infinite;
+  -webkit-animation: cir23 48s linear 0s infinite;
+  animation: cir23 48s linear 0s infinite;
   -webkit-transition-delay: 100ms !important;
   transition-delay: 300ms !important;
 }
 .ball_24 .ball {
-  -webkit-animation: cir24 16s linear 0s infinite;
-  animation: cir24 16s linear 0s infinite;
+  -webkit-animation: cir24 48s linear 0s infinite;
+  animation: cir24 48s linear 0s infinite;
   -webkit-transition-delay: 100ms !important;
   transition-delay: 100ms !important;
 }
 .ball_31 .ball {
-  -webkit-animation: cir31 16s linear 0s infinite;
-  animation: cir31 16s linear 0s infinite;
+  -webkit-animation: cir31 48s linear 0s infinite;
+  animation: cir31 48s linear 0s infinite;
   -webkit-transition-delay: 1600ms !important;
   transition-delay: 1600ms !important;
 }
 .ball_32 .ball {
-  -webkit-animation: cir32 16s linear 0s infinite;
-  animation: cir32 16s linear 0s infinite;
+  -webkit-animation: cir32 48s linear 0s infinite;
+  animation: cir32 48s linear 0s infinite;
   -webkit-transition-delay: 1350ms !important;
   transition-delay: 1350ms !important;
 }
 .ball_33 .ball {
-  -webkit-animation: cir33 16s linear 0s infinite;
-  animation: cir33 16s linear 0s infinite;
+  -webkit-animation: cir33 48s linear 0s infinite;
+  animation: cir33 48s linear 0s infinite;
   -webkit-transition-delay: 1100ms !important;
   transition-delay: 1100ms !important;
 }
 .ball_34 .ball {
-  -webkit-animation: cir34 16s linear 0s infinite;
-  animation: cir34 16s linear 0s infinite;
+  -webkit-animation: cir34 48s linear 0s infinite;
+  animation: cir34 48s linear 0s infinite;
   -webkit-transition-delay: 850ms !important;
   transition-delay: 850ms !important;
 }
 .ball_35 .ball {
-  -webkit-animation: cir35 16s linear 0s infinite;
-  animation: cir35 16s linear 0s infinite;
+  -webkit-animation: cir35 48s linear 0s infinite;
+  animation: cir35 48s linear 0s infinite;
   -webkit-transition-delay: 600ms !important;
   transition-delay: 600ms !important;
 }
 .ball_36 .ball {
-  -webkit-animation: cir36 16s linear 0s infinite;
-  animation: cir36 16s linear 0s infinite;
+  -webkit-animation: cir36 48s linear 0s infinite;
+  animation: cir36 48s linear 0s infinite;
   -webkit-transition-delay: 350ms !important;
   transition-delay: 350ms !important;
 }

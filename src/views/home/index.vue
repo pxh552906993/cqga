@@ -38,7 +38,7 @@ export default {
       setTimeout(function () {
         _this.sS = false
         _this.$refs.mychild.dataChange(ky)
-      }, 2000)
+      }, 1000)
     }
   },
   mounted () {
