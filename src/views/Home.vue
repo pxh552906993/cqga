@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <div class="hheadtitle">重庆市公安局“10+X”智慧警务应用</div>
+    <!-- <div class="hheadtitle">重庆市公安局“10+X”智慧警务应用</div> -->
     <transition name="el-zoom-in-center">
       <index></index>
     </transition>

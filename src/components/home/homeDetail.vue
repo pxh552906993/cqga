@@ -5,16 +5,16 @@
         <div class="hd_top_group">
           <div class="hd_top_group_title">总体介绍</div>
           <p class="hd_top_group_content">
-            {{content2}}
+            {{homeData.js}}
           </p>
         </div>
         <div class="hd_top_group">
-          <div class="hd_top_group_title">职能详情</div>
+          <div class="hd_top_group_title">内容简介</div>
           <div class="hd_top_group_title_l">
-            <div v-for="(item,key) in homeData.cg" :key="key" :class="[item.bool?'hd_top_group_title_l_ga':'hd_top_group_title_l_g']" @click="lTitleChange(key)">{{item.z_name}}</div>
+            <div v-for="(item,key) in homeData.cg" :key="key" :class="[item.bool?'hd_top_group_title_l_ga':'hd_top_group_title_l_g']" @click="invokelTitleChange(key)">{{item.z_name}}</div>
           </div>
           <p class="hd_top_group_content">
-            {{content}}
+            {{homeData.content}}
           </p>
           <div class="hd_top_group_button">进入系统</div>
         </div>
@@ -22,12 +22,12 @@
     </transition>
     <transition name="el-zoom-in-center">
       <div v-show="!show" class="hd_bottom">
-        <div class="hd_ball_font2">{{dataName[dataIndex]}}</div>
+        <div class="hd_ball_font2">十智</div>
         <div class="hd_ball_icon_left" @click="changeRight"></div>
         <div class="hd_ball_icon_right" @click="changeLeft"></div>
         <div class="ball_s">
-          <div v-for="(item,key) in dataList" :key="key" class="hd_ball" :class="[item.bool?item.class+'_a '+item.class:item.class]" @click="dataChange(item.name),dataChange2(key)">
-            <div class="hd_ball_font">{{item.name}}</div>
+          <div v-for="(item,key) in dataList" :key="key" class="hd_ball" :class="[item.bool?item.class+'a '+item.class:item.class]" @click="dataChange(item.name)">
+            <div :class="[item.bool?'hd_ball_fonta':'hd_ball_font']">{{item.name}}</div>
           </div>
         </div>
       </div>
@@ -50,48 +50,53 @@ export default {
       title_l: false,
       dataList: [
         {
-          name: '',
+          name: '智学',
           class: 'ball1',
           bool: false
         },
         {
-          name: '',
+          name: '智训',
           class: 'ball2',
           bool: false
         },
         {
-          name: '',
+          name: '智控',
           class: 'ball3',
           bool: false
         },
         {
-          name: '',
+          name: '智管',
           class: 'ball4',
           bool: false
         },
         {
-          name: '',
+          name: '智治',
           class: 'ball5',
           bool: false
         },
         {
-          name: '',
+          name: '智服',
           class: 'ball6',
           bool: false
         },
         {
-          name: '',
+          name: '智侦',
           class: 'ball7',
           bool: false
         },
         {
-          name: '',
+          name: '智防',
           class: 'ball8',
           bool: false
         },
         {
-          name: '',
+          name: '智监',
           class: 'ball9',
+          bool: false
+        },
+        {
+          name: '智指',
+          class: 'ball10',
           bool: false
         }
       ],
@@ -124,8 +129,13 @@ export default {
     ...mapActions('home', [
       'invokeGetDatas'
     ]),
+    ...mapActions('home', [
+      'invokelTitleChange'
+    ]),
     lTitleChange (k) {
+      console.log(k)
       var _this = this
+      _this.content = ''
       this.homeData.cg.forEach(function (item, index, arr) {
         if (index === k) {
           item.bool = true
@@ -136,9 +146,9 @@ export default {
       })
     },
     changeLeft () {
-      this.dataChange2(this.dataIndex - 1)
+      console.log(this.dataIndex)
       if (this.dataIndex === 0) {
-        this.dataIndex = 9
+        this.dataIndex = 10
         this.dataChange(this.dataName[this.dataIndex])
       } else {
         this.dataIndex--
@@ -146,8 +156,7 @@ export default {
       }
     },
     changeRight () {
-      this.dataChange2(this.dataIndex)
-      if (this.dataIndex === 9) {
+      if (this.dataIndex === 10) {
         this.dataIndex = 0
         this.dataChange(this.dataName[this.dataIndex])
       } else {
@@ -156,7 +165,6 @@ export default {
       }
     },
     dataChange2 (k) {
-      console.log(k)
       var _this = this
       this.dataList.forEach(function (item, index, arr) {
         item.bool = false
@@ -169,24 +177,23 @@ export default {
       this.invokeGetDatas(data)
       var _this = this
       var dataArr = this.dataName.slice()
+      this.dataList.forEach(function (item, index, arr) {
+        item.bool = false
+      })
       dataArr.forEach(function (item, index, arr) {
         if (item === data) {
           _this.dataActive = data
           _this.dataIndex = index
-          arr.splice(index, 1)
+          _this.dataList[index].bool = true
+          // arr.splice(index, 1)
         }
       })
-      setTimeout(function () {
-        dataArr.forEach(function (item, index, arr) {
-          _this.dataList[index].name = item
-        })
-      }, 1500)
+    //   dataArr.forEach(function (item, index, arr) {
+    //     _this.dataList[index].name = item
+    //   })
     }
   },
   mounted () {
-    console.log(this.homeData.cg[0])
-    this.content = this.homeData.cg[0].introduce
-    this.content2 = this.homeData.js
   }
 }
 </script>
@@ -230,6 +237,7 @@ export default {
         line-height: 3.7vh;
         color: #fff;
         font-weight: 300;
+        cursor: pointer;
       }
       .hd_top_group_title_l_ga{
         width: 8vw;
@@ -241,6 +249,7 @@ export default {
         line-height: 3.7vh;
         color: #fff;
         font-weight: 300;
+        cursor: pointer;
       }
     }
     .hd_top_group_content{
@@ -266,7 +275,8 @@ export default {
         font-weight: 300;
         position: absolute;
         right: 5vw;
-        bottom: 1vh
+        bottom: 1vh;
+        cursor: pointer;
 
     }
   }
@@ -288,6 +298,17 @@ export default {
   bottom: 25vh;
   background-image:url('../../assets/home/left.png');
   background-size:100% 100%;
+  cursor: pointer;
+}
+.hd_ball_icon_left:hover{
+  width: 166px;
+  height: 74px;
+  position: absolute;
+  right: 10vw;
+  bottom: 25vh;
+  background-image:url('../../assets/home/left2.png');
+  background-size:100% 100%;
+  cursor: pointer;
 }
 .hd_ball_icon_right{
   width: 166px;
@@ -297,6 +318,17 @@ export default {
   bottom: 25vh;
   background-image:url('../../assets/home/right.png');
   background-size:100% 100%;
+  cursor: pointer;
+}
+.hd_ball_icon_right:hover{
+  width: 166px;
+  height: 74px;
+  position: absolute;
+  left: 10vw;
+  bottom: 25vh;
+  background-image:url('../../assets/home/right2.png');
+  background-size:100% 100%;
+  cursor: pointer;
 }
 .hd_bottom{
   width: 100vw;
@@ -332,21 +364,21 @@ export default {
         font-size: 32px;
         font-weight: 900;
       }
-      .hd_ball_font:hover{
+      .hd_ball_fonta{
         transform: rotateZ(-30deg) translateY(0px);
         background-image:url('../../assets/home/ball_d.png');
         background-size:100% 100%;
-        width: 170px;
-        height: 170px;
-        line-height: 170px;
+        width: 190px;
+        height: 190px;
+        line-height: 190px;
         font-size: 32px;
         font-weight: 900;
       }
     }
     .ball2{
-      transform: rotateZ(47.5deg) translateY(0px);
+      transform: rotateZ(45.5deg) translateY(0px);
       .hd_ball_font{
-        transform: rotateZ(-47.5deg) translateY(0px);
+        transform: rotateZ(-45.5deg) translateY(0px);
         background-image:url('../../assets/home/ball_c.png');
         background-size:100% 100%;
         width: 170px;
@@ -355,21 +387,21 @@ export default {
         font-size: 32px;
         font-weight: 900;
       }
-      .hd_ball_font:hover{
-        transform: rotateZ(-47.5deg) translateY(0px);
+      .hd_ball_fonta{
+        transform: rotateZ(-45.5deg) translateY(0px);
         background-image:url('../../assets/home/ball_d.png');
         background-size:100% 100%;
-        width: 170px;
-        height: 170px;
-        line-height: 170px;
+        width: 190px;
+        height: 190px;
+        line-height: 190px;
         font-size: 32px;
         font-weight: 900;
       }
     }
     .ball3{
-      transform: rotateZ(65deg) translateY(0px);
+      transform: rotateZ(61deg) translateY(0px);
       .hd_ball_font{
-        transform: rotateZ(-65deg) translateY(0px);
+        transform: rotateZ(-61deg) translateY(0px);
         background-image:url('../../assets/home/ball_c.png');
         background-size:100% 100%;
         width: 170px;
@@ -378,21 +410,21 @@ export default {
         font-size: 32px;
         font-weight: 900;
       }
-      .hd_ball_font:hover{
-        transform: rotateZ(-65deg) translateY(0px);
+      .hd_ball_fonta{
+        transform: rotateZ(-61deg) translateY(0px);
         background-image:url('../../assets/home/ball_d.png');
         background-size:100% 100%;
-        width: 170px;
-        height: 170px;
-        line-height: 170px;
+        width: 190px;
+        height: 190px;
+        line-height: 190px;
         font-size: 32px;
         font-weight: 900;
       }
     }
     .ball4{
-      transform: rotateZ(82.5deg) translateY(0px);
+      transform: rotateZ(76.5deg) translateY(0px);
       .hd_ball_font{
-        transform: rotateZ(-82.5deg) translateY(0px);
+        transform: rotateZ(-76.5deg) translateY(0px);
         background-image:url('../../assets/home/ball_c.png');
         background-size:100% 100%;
         width: 170px;
@@ -401,21 +433,21 @@ export default {
         font-size: 32px;
         font-weight: 900;
       }
-      .hd_ball_font:hover{
-        transform: rotateZ(-82.5deg) translateY(0px);
+      .hd_ball_fonta{
+        transform: rotateZ(-76.5deg) translateY(0px);
         background-image:url('../../assets/home/ball_d.png');
         background-size:100% 100%;
-        width: 170px;
-        height: 170px;
-        line-height: 170px;
+        width: 190px;
+        height: 190px;
+        line-height: 190px;
         font-size: 32px;
         font-weight: 900;
       }
     }
     .ball5{
-      transform: rotateZ(100deg) translateY(0px);
+      transform: rotateZ(92deg) translateY(0px);
       .hd_ball_font{
-        transform: rotateZ(-100deg) translateY(0px);
+        transform: rotateZ(-92deg) translateY(0px);
         background-image:url('../../assets/home/ball_c.png');
         background-size:100% 100%;
         width: 170px;
@@ -424,21 +456,21 @@ export default {
         font-size: 32px;
         font-weight: 900;
       }
-      .hd_ball_font:hover{
-        transform: rotateZ(-100deg) translateY(0px);
+      .hd_ball_fonta{
+        transform: rotateZ(-92deg) translateY(0px);
         background-image:url('../../assets/home/ball_d.png');
         background-size:100% 100%;
-        width: 170px;
-        height: 170px;
-        line-height: 170px;
+        width: 190px;
+        height: 190px;
+        line-height: 190px;
         font-size: 32px;
         font-weight: 900;
       }
     }
     .ball6{
-      transform: rotateZ(117.5deg) translateY(0px);
+      transform: rotateZ(107.5deg) translateY(0px);
       .hd_ball_font{
-        transform: rotateZ(-117.5deg) translateY(0px);
+        transform: rotateZ(-107.5deg) translateY(0px);
         background-image:url('../../assets/home/ball_c.png');
         background-size:100% 100%;
         width: 170px;
@@ -447,21 +479,21 @@ export default {
         font-size: 32px;
         font-weight: 900;
       }
-      .hd_ball_font:hover{
-        transform: rotateZ(-117.5deg) translateY(0px);
+      .hd_ball_fonta{
+        transform: rotateZ(-107.5deg) translateY(0px);
         background-image:url('../../assets/home/ball_d.png');
         background-size:100% 100%;
-        width: 170px;
-        height: 170px;
-        line-height: 170px;
+        width: 190px;
+        height: 190px;
+        line-height: 190px;
         font-size: 32px;
         font-weight: 900;
       }
     }
     .ball7{
-      transform: rotateZ(135deg) translateY(0px);
+      transform: rotateZ(123deg) translateY(0px);
       .hd_ball_font{
-        transform: rotateZ(-135deg) translateY(0px);
+        transform: rotateZ(-123deg) translateY(0px);
         background-image:url('../../assets/home/ball_c.png');
         background-size:100% 100%;
         width: 170px;
@@ -470,21 +502,21 @@ export default {
         font-size: 32px;
         font-weight: 900;
       }
-      .hd_ball_font:hover{
-        transform: rotateZ(-135deg) translateY(0px);
+      .hd_ball_fonta{
+        transform: rotateZ(-123deg) translateY(0px);
         background-image:url('../../assets/home/ball_d.png');
         background-size:100% 100%;
-        width: 170px;
-        height: 170px;
-        line-height: 170px;
+        width: 190px;
+        height: 190px;
+        line-height: 190px;
         font-size: 32px;
         font-weight: 900;
       }
     }
     .ball8{
-      transform: rotateZ(152.5deg) translateY(0px);
+      transform: rotateZ(138.5deg) translateY(0px);
       .hd_ball_font{
-        transform: rotateZ(-152.5deg) translateY(0px);
+        transform: rotateZ(-138.5deg) translateY(0px);
         background-image:url('../../assets/home/ball_c.png');
         background-size:100% 100%;
         width: 170px;
@@ -493,9 +525,22 @@ export default {
         font-size: 32px;
         font-weight: 900;
       }
-      .hd_ball_font:hover{
-        transform: rotateZ(-152.5deg) translateY(0px);
+      .hd_ball_fonta{
+        transform: rotateZ(-138.5deg) translateY(0px);
         background-image:url('../../assets/home/ball_d.png');
+        background-size:100% 100%;
+        width: 190px;
+        height: 190px;
+        line-height: 190px;
+        font-size: 32px;
+        font-weight: 900;
+      }
+    }
+    .ball9{
+      transform: rotateZ(154deg) translateY(0px);
+      .hd_ball_font{
+        transform: rotateZ(-154deg) translateY(0px);
+        background-image:url('../../assets/home/ball_c.png');
         background-size:100% 100%;
         width: 170px;
         height: 170px;
@@ -503,8 +548,18 @@ export default {
         font-size: 32px;
         font-weight: 900;
       }
+      .hd_ball_fonta{
+        transform: rotateZ(-154deg) translateY(0px);
+        background-image:url('../../assets/home/ball_d.png');
+        background-size:100% 100%;
+        width: 190px;
+        height: 190px;
+        line-height: 190px;
+        font-size: 32px;
+        font-weight: 900;
+      }
     }
-    .ball9{
+    .ball10{
       transform: rotateZ(170deg) translateY(0px);
       .hd_ball_font{
         transform: rotateZ(-170deg) translateY(0px);
@@ -516,13 +571,13 @@ export default {
         font-size: 32px;
         font-weight: 900;
       }
-      .hd_ball_font:hover{
+      .hd_ball_fonta{
         transform: rotateZ(-170deg) translateY(0px);
         background-image:url('../../assets/home/ball_d.png');
         background-size:100% 100%;
-        width: 170px;
-        height: 170px;
-        line-height: 170px;
+        width: 190px;
+        height: 190px;
+        line-height: 190px;
         font-size: 32px;
         font-weight: 900;
       }

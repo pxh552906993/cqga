@@ -1,6 +1,7 @@
 import axios from 'axios'
 // collection.js
 const state = {
+  IP: window.location.host === '77.1.34.12:8089' ? 'http://77.1.34.12:8089' : 'http://localhost:80',
   collects: [], // 初始化一个colects数组
   homeData: {
     js: '“智学”是市局“十智”工程其中之一，主要目标是通过移动警务终端与电脑端的应用，提升基层警员的大数据技能，将智慧公安的能力“惠”至一线，并打造警务经验众创众筹的新模式，构建公安业务体系智慧宝库，推动公安大数据形成“学”、“研”、“用”一体化的良性发展。包括“智学自创”应用、移动端“智学”APP',
@@ -16,7 +17,8 @@ const state = {
       z_name: '智·用',
       bool: false,
       introduce: '模型超市。“众筹”全警自创业务模型，形成服务全警实战的大数据模型孵化中心大数据交流学习平台。集需求发布、疑问解答、经验分享为一体，打造全警大数据交流集散地 '
-    }]
+    }],
+    content: ''
   }
 }
 const getters = {
@@ -29,10 +31,9 @@ const mutations = {
     state.collects.push(items)
   },
   getDatas (state, items) {
-    console.log(items)
     axios
       .get(
-        this.$messageIP + '/tenwisdow/wisdow_xq', {
+        state.IP + '/tenwisdow/wisdow_xq', {
           params: {
             type: items
           }
@@ -41,14 +42,29 @@ const mutations = {
         if (res.data.code === '200') {
           state.homeData.js = res.data.js
           state.homeData.cg = res.data.cg
-          state.homeData.cg.forEach(function (item, index, arr) {
-            item.bool = false
-          })
+          if (state.homeData.cg !== []) {
+            state.homeData.cg.forEach(function (item, index, arr) {
+              item.bool = false
+            })
+          }
+          mutations.lTitleChange(state, 0)
         } else {}
       })
       .catch(function (error) {
         console.log(error)
       })
+  },
+  lTitleChange (state, k) {
+    console.log(state)
+    state.homeData.content = ''
+    state.homeData.cg.forEach(function (item, index, arr) {
+      if (index === k) {
+        item.bool = true
+        state.homeData.content = item.introduce
+      } else {
+        item.bool = false
+      }
+    })
   }
 }
 const actions = {
@@ -57,6 +73,9 @@ const actions = {
   },
   invokeGetDatas (context, item) {
     context.commit('getDatas', item)
+  },
+  invokelTitleChange (context, item) {
+    context.commit('lTitleChange', item)
   }
 }
 export default {
