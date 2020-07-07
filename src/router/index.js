@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Index from '../views/shiju.vue'
+import Index4 from '../views/shiju2.vue'
 import Index2 from '../views/Home.vue'
 import Index3 from '../views/Home2.vue'
 
@@ -11,6 +12,11 @@ const routes = [
     path: '/',
     name: 'index',
     component: Index
+  },
+  {
+    path: '/Index4',
+    name: 'Index4',
+    component: Index4
   },
   {
     path: '/Index2',

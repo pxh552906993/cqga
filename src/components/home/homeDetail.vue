@@ -13,9 +13,12 @@
           <div class="hd_top_group_title_l">
             <div v-for="(item,key) in homeData.cg" :key="key" :class="[item.bool?'hd_top_group_title_l_ga':'hd_top_group_title_l_g']" @click="invokelTitleChange(key)">{{item.z_name}}</div>
           </div>
-          <p class="hd_top_group_content">
+          <p v-if="!video" class="hd_top_group_content">
             {{homeData.content}}
           </p>
+          <video v-if="video" class="hd_top_group_content2" controls>
+            <source src="../../assets/shiju2bg2.mp4" type="video/mp4">
+          </video>
           <div class="hd_top_group_button">进入系统</div>
         </div>
       </div>
@@ -47,6 +50,7 @@ export default {
   },
   data () {
     return {
+      video: false,
       title_l: false,
       dataList: [
         {
@@ -174,6 +178,12 @@ export default {
       }, 100)
     },
     dataChange (data) {
+      console.log(data)
+      if (data === '智训') {
+        this.video = true
+      } else {
+        this.video = false
+      }
       this.invokeGetDatas(data)
       var _this = this
       var dataArr = this.dataName.slice()
@@ -257,6 +267,17 @@ export default {
       color: #fff;
       line-height: 4vh;
       height: 100%;
+      width: 90%;
+      word-break: break-all;
+      margin: 5px auto;
+      text-align: left;
+      letter-spacing: 5px;
+    }
+    .hd_top_group_content2{
+      font-size: 26px;
+      color: #fff;
+      line-height: 4vh;
+      height: 60%;
       width: 90%;
       word-break: break-all;
       margin: 5px auto;
